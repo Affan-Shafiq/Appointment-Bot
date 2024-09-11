@@ -167,6 +167,11 @@ class user:
         # Locate and click the submit button
         submit_button = self.driver.find_element(By.ID, 'valBookNows')
         submit_button.click()
+        time.sleep(3)
+
+        # Logout
+        self.driver.get('https://blsitalypakistan.com/account/logout')
+        time.sleep(2)
 
         # Return to confirm application status
         return True
