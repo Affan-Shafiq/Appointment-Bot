@@ -1,4 +1,3 @@
-from blsBot.test2 import appointment_successful
 from user import user
 from selenium import webdriver
 import yaml
