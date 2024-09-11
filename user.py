@@ -35,11 +35,17 @@ class user:
         submit_button.click()
 
     def appointment_booking(self, url):
-        self.driver.get("https://blsitalypakistan.com/bls_appmnt/bls-italy-appointment")
+        self.driver.get(url)
         time.sleep(1)
 
-        # Locate the dropdown menu by its ID (valCenterLocationId in this case)
-        dropdown = self.driver.find_element(By.ID, "valCenterLocationId")
+        try:
+            # Locate the dropdown menu by its ID (valCenterLocationId in this case)
+            dropdown = self.driver.find_element(By.ID, "valCenterLocationId")
+        except:
+            # Logout
+            self.driver.get('https://blsitalypakistan.com/account/logout')
+            time.sleep(2)
+            return False
 
         # Create a Select object to interact with the dropdown
         select = Select(dropdown)

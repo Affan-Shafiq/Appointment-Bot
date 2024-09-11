@@ -1,3 +1,4 @@
+from blsBot.test2 import appointment_successful
 from user import user
 from selenium import webdriver
 import yaml
@@ -8,8 +9,9 @@ users = conf['users']
 
 # Initialize Chrome driver
 driver = webdriver.Chrome()
+appointment_status = False
 
-while True:
+while not appointment_status:
     i = 0
     for user_data in users:
         email = user_data['email']
@@ -29,3 +31,6 @@ while True:
             u.user_login(url="https://blsitalypakistan.com/account/login")
             time.sleep(1)
             appointment_status = u.appointment_booking(url="https://blsitalypakistan.com/bls_appmnt/bls-italy-appointment")
+            if not appointment_status:
+                appointment_status = True
+                break
