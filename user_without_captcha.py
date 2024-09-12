@@ -6,11 +6,12 @@ import time
 import requests
 
 class user:
-    def __init__(self, first_name, last_name, email, password, driver):
+    def __init__(self, first_name, last_name, email, password, card_num, driver):
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
         self.password = password
+        self.card_num = card_num
         self.driver = driver
 
     def user_login(self, url):
@@ -152,7 +153,35 @@ class user:
         # Locate and click the submit button
         submit_button = self.driver.find_element(By.ID, 'valBookNows')
         submit_button.click()
-        time.sleep(3)
+
+        # At this point, the page redirects to the payment page
+        # Now, let's handle the payment page
+        time.sleep(5)
+
+        # Fill in card details
+        card_number_input = self.driver.find_element(By.ID, 'cardNumber')
+        card_number_input.send_keys(self.card_num)
+
+        # Select expiry month from dropdown
+        expiry_month_dropdown = self.driver.find_element(By.ID, 'expiryMonth')
+        select_month = Select(expiry_month_dropdown)
+        select_month.select_by_visible_text('September')
+
+        # Select expiry year from dropdown
+        expiry_year_dropdown = self.driver.find_element(By.ID, 'expiryYear')
+        select_year = Select(expiry_year_dropdown)
+        select_year.select_by_visible_text('2028')
+
+        # Enter CVC
+        cvc_input = self.driver.find_element(By.ID, 'cvc')
+        cvc_input.send_keys('794')
+
+        # Click the Pay button
+        pay_button = self.driver.find_element(By.ID, 'payButton')
+        pay_button.click()
+
+        # Wait for the payment to process
+        time.sleep(5)
 
         # Logout
         self.driver.get('https://blsitalypakistan.com/account/logout')

@@ -17,7 +17,8 @@ while not appointment_status:
         password = user_data['password']
         firstName = user_data['firstName']
         lastName = user_data['lastName']
-        u = user(firstName, lastName, email, password, driver)
+        cardNo = user_data['cardNo']
+        u = user(firstName, lastName, email, password, cardNo, driver)
         if i == 0:
             u.user_login(url="https://blsitalypakistan.com/account/login")
             time.sleep(1)
