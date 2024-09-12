@@ -1,4 +1,4 @@
-# User class will hold all the data about a user and will be used in test.py
+# User class will hold all the data about a user and will be used in test_without_captcha.py
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
